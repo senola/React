@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>hello world</title>
+    </head>
+    <body>
+        <div id="app"></div>
+        <div id="clock"></div>
+    </body>
+    <script src="../common/react.js"></script>
+    <script src="../common/react-dom.js"></script>
+    <script src="../common/babel.min.js"></script>
+    <script type="text/babel">
+        /**
+         * React DOM 在渲染之前默认会 过滤 所有传入的值。
+         * 它可以确保你的应用不会被注入攻击。所有的内容在渲染之前都被转换成了字符串。
+         * 这样可以有效地防止 XSS(跨站脚本) 攻击。
+         */
+        const element = ( // jsx 代码块扩上一个小括号，这样可以防止分号自动插入 的bug.
+            <div>
+                <h1>hello world</h1>
+                <h2>hello world</h2>
+                <h3>hello world</h3>
+            </div>
+        );
+        ReactDOM.render(
+            element,
+            document.getElementById('app')
+        );
+    </script>
+    <script type="text/babel">
+        function clock() {
+            const element = (
+                <p>time: {new Date().toLocaleString()}</p>
+            );
+            ReactDOM.render(
+                element,
+                document.getElementById('clock')
+            );
+        }
+        setInterval(clock, 1000);
+    </script>
+</html>
