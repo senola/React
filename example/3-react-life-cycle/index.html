@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>react的生命周期</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="lifecycle"></div>
+    </body>
+    <script src="../common/react.js"></script>
+    <script src="../common/react-dom.js"></script>
+    <script src="../common/babel.min.js"></script>
+    <script type="text/babel">
+        // 定义Clock组件
+        class Clock extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {date: new Date()};
+            }
+            // 当组件输出到 DOM 后会执行 componentDidMount() 钩子
+            componentDidMount() {
+                this.TimeId = setInterval(() => this.tick(), 1000);
+            }
+            componentWillUnmount() {
+                clearInterval(this.TimeId);
+            }
+
+            tick() {
+                this.setState({
+                    date: new Date()
+                });
+            }
+            render() {
+                return <p>当前时间是： {this.state.date.toLocaleString()}</p>;
+            }
+        }
+    </script>
+    <script type="text/babel">
+
+        ReactDOM.render(<Clock />, document.getElementById('lifecycle'));
+    </script>
+</html>

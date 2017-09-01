@@ -2,12 +2,43 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>component</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-
+        <div id="welcome"></div>
+        <div id="card"></div>
     </body>
     <script src="../common/react.js"></script>
     <script src="../common/react-dom.js"></script>
     <script src="../common/babel.min.js"></script>
+    <script type="text/babel">
+        // 定义组件
+        function Welcome(props) {
+            return <h1>hello, {props.name}</h1>
+        }
+        // 用ES6方式定义组件
+        class Card extends React.Component {
+            render() {
+                return <div>hello, I am {this.props.name}</div>
+            }
+        }
+    </script>
+    <script type="text/babel">
+        // 1、组件定义需要放在使用前面
+        // 2、组件名称必须以大写字母开头
+        const element1 = <Welcome name="world!"/>;
+        const element2 = <Card name="card"/>;
+        // 3、组件的返回值只能有一个根元素，多个组件需要包含在一个根元素内
+        const element3 = (
+            <div>
+                <Card name="card1"/>
+                <Card name="card2"/>
+                <Card name="card3"/>
+                <Card name="card4"/>
+            </div>
+        );
+        ReactDOM.render(element1, document.getElementById('welcome'));
+        ReactDOM.render(element3, document.getElementById('card'));
+    </script>
 </html>
