@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>event</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="event"></div>
+    </body>
+    <script src="../common/react.js"></script>
+    <script src="../common/react-dom.js"></script>
+    <script src="../common/babel.min.js"></script>
+    <script type="text/babel">
+        // 1、React 元素的事件处理和 DOM元素的很相似。但是有一点语法上的不同:
+        // 2、React事件绑定属性的命名采用驼峰式写法，而不是小写
+        // 3、如果采用 JSX 的语法你需要传入一个函数作为事件处理函数，而不是一个字符串(DOM元素的写法)
+        // 4、不能使用返回 false 的方式阻止默认行为
+        // 如：
+        // <button onClick={activateLasers}>
+        //    Activate Lasers
+        // </button>
+
+        class Toggle extends React.Component {
+            // 构造器
+            constructor(props) {
+                super(props);
+                this.state = {isToggleOn: true};
+                // 绑定操作是为了在回调中能使用`this`, 否则会报undefined异常
+                //this.handleClick = this.handleClick.bind(this);
+            }
+            // ES6写法，绑定this
+            handleClick = () => {
+                this.setState(preState => ({
+                    isToggleOn: !preState.isToggleOn
+                }));
+            };
+
+            render() {
+                return (
+                    <div>
+                        <button onClick={this.handleClick}>
+                            {this.state.isToggleOn ? 'ON' : 'OFF'}
+                        </button>
+                        <p>{this.state.isToggleOn ? '打开内容' : '关闭内容'}</p>
+                    </div>
+
+                );
+            }
+        }
+
+    </script>
+    <script type="text/babel">
+        ReactDOM.render(
+                <Toggle />,
+            document.getElementById('event')
+        );
+    </script>
+</html>

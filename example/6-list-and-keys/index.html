@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>列表 & Keys</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h2>渲染多样的组件</h2>
+        <div id="demo1"></div>
+    </body>
+    <script src="../common/react.js"></script>
+    <script src="../common/react-dom.js"></script>
+    <script src="../common/babel.min.js"></script>
+    <script type="text/babel">
+
+    </script>
+    <script type="text/babel">
+        // Keys可以在DOM中的某些元素被增加或删除的时候帮助React识别哪些元素发生了变化。因此你应当给数组中的每一个元素赋予一个确定的标识。
+        function NumberList(props) {
+            const numbers = props.numbers;
+            const listItems = numbers.map((num) =>
+                <li key={num.toString()}>{num}</li>
+            );
+            return (
+                <ul>{listItems}</ul>
+            );
+        }
+        const numbers = [1, 2, 3, 4, 5];
+        ReactDOM.render(
+            <NumberList numbers={numbers} />,
+            document.getElementById('demo1')
+        );
+    </script>
+</html>

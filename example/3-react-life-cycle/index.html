@@ -16,6 +16,7 @@
         class Clock extends React.Component {
             constructor(props) {
                 super(props);
+                // 构造函数是唯一能够初始化 this.state 的地方。
                 this.state = {date: new Date()};
             }
             // 当组件输出到 DOM 后会执行 componentDidMount() 钩子
@@ -27,9 +28,14 @@
             }
 
             tick() {
+                // 只能使用setState()方法更新状态
                 this.setState({
                     date: new Date()
                 });
+                // 状态更新可能是异步的，不应该依靠它们的值来计算下一个状态
+                //this.setState((prevState, props) => ({
+                //    counter: prevState.counter + props.increment
+                //}));
             }
             render() {
                 return <p>当前时间是： {this.state.date.toLocaleString()}</p>;
@@ -37,7 +43,15 @@
         }
     </script>
     <script type="text/babel">
-
-        ReactDOM.render(<Clock />, document.getElementById('lifecycle'));
+        const element = (
+            <div>
+                <Clock/>
+                <Clock/>
+                <Clock/>
+                <Clock/>
+                <Clock/>
+            </div>
+        );
+        ReactDOM.render(element, document.getElementById('lifecycle'));
     </script>
 </html>
